@@ -24,7 +24,7 @@ fun App() {
         Column {
             Button(onClick = {
                 println("Button clicked")
-                listViewModel.changeItem()
+                listViewModel.addItem()
             }
             ) {
                 Text("Load Values")
@@ -32,7 +32,7 @@ fun App() {
 
             Spacer(Modifier.padding(5.dp))
 
-            myComposeList(listViewModel)
+            ComposeList(listViewModel)
         }
     }
 }

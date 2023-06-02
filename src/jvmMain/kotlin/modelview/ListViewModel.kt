@@ -7,10 +7,7 @@ import androidx.compose.runtime.setValue
 
 class ListViewModel {
 
-    var formattedTime by mutableStateOf("00:00:000")
-    var listOfItems = mutableStateListOf<Int>()
-
-
+    var listOfItems = mutableStateListOf<String>()
 
     private var index = 0
 
@@ -18,9 +15,13 @@ class ListViewModel {
 
         println("changeItem")
 
-        formattedTime = "Changed"
+//        listOfItems.add(index++)
 
-        listOfItems.add(index++)
+    }
 
+    fun addItem() {
+        println("changeItem")
+
+        listOfItems.add("My note number ${index++}")
     }
 }
