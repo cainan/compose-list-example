@@ -1,9 +1,6 @@
 package modelview
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 
 class ListViewModel {
 
@@ -19,9 +16,15 @@ class ListViewModel {
 
     }
 
-    fun addItem() {
-        println("changeItem")
-
-        listOfItems.add("My note number ${index++}")
+    fun addItem(note: String) {
+        println("addItem")
+        listOfItems.add(note)
     }
+
+
+    fun removeItem(note: String) {
+        println("removeItem")
+        listOfItems.remove(note)
+    }
+
 }

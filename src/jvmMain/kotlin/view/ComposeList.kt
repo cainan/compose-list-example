@@ -25,14 +25,16 @@ fun ComposeList(listViewModel: ListViewModel) {
         items(listViewModel.listOfItems) { note ->
             NotesCard(note = note, onClicked = {
                 println("NotesCard clicked")
-            })
+            }) {
+                listViewModel.removeItem(note)
+            }
         }
 
     }
 }
 
 @Composable
-fun NotesCard(note: String, onClicked: () -> Unit) {
+fun NotesCard(note: String, onClicked: () -> Unit, function: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(1f)
             .padding(10.dp)
@@ -47,16 +49,16 @@ fun NotesCard(note: String, onClicked: () -> Unit) {
                 modifier = Modifier
                     .weight(80f)
                     .padding(10.dp),
-                text = "$note"
+                text = note
             )
 
             Button(
                 modifier = Modifier
                     .padding(10.dp),
 
-                onClick = {
-                    println("Remove button was clicked")
-                }) {
+                onClick = function
+
+            ) {
                 Text("Remove")
             }
         }
