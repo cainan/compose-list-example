@@ -8,14 +8,23 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import modelview.ListViewModel
 
+
 @Composable
 fun ComposeList(listViewModel: ListViewModel) {
+
+    // used in dialogs
+    val dialogState = remember { mutableStateOf(false) }
+    val noteToEdit = remember { mutableStateOf("") }
+
+
     LazyColumn(
         modifier = Modifier.fillMaxWidth()
             .fillMaxHeight(),
@@ -25,12 +34,17 @@ fun ComposeList(listViewModel: ListViewModel) {
         items(listViewModel.listOfItems) { note ->
             NotesCard(note = note, onClicked = {
                 println("NotesCard clicked")
+                dialogState.value = true
+                noteToEdit.value = note
+                println("Will edit this: ${noteToEdit.value}")
             }) {
                 listViewModel.removeItem(note)
             }
         }
 
     }
+
+    ShowDialog(dialogState, noteToEdit)
 }
 
 @Composable
