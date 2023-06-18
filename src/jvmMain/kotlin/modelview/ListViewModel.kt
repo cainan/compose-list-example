@@ -6,14 +6,10 @@ class ListViewModel {
 
     var listOfItems = mutableStateListOf<String>()
 
-    private var index = 0
-
-    fun changeItem() {
-
-        println("changeItem")
-
-//        listOfItems.add(index++)
-
+    fun changeItem(index: Int, edittedText: String) {
+        println("changeItem:")
+        listOfItems.removeAt(index)
+        listOfItems.add(index, edittedText)
     }
 
     fun addItem(note: String) {

@@ -23,7 +23,7 @@ fun ComposeList(listViewModel: ListViewModel) {
     // used in dialogs
     val dialogState = remember { mutableStateOf(false) }
     val noteToEdit = remember { mutableStateOf("") }
-
+    val indexToEdit = remember { mutableStateOf(-1) }
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth()
@@ -36,6 +36,7 @@ fun ComposeList(listViewModel: ListViewModel) {
                 println("NotesCard clicked")
                 dialogState.value = true
                 noteToEdit.value = note
+                indexToEdit.value = listViewModel.listOfItems.indexOf(note)
                 println("Will edit this: ${noteToEdit.value}")
             }) {
                 listViewModel.removeItem(note)
@@ -44,7 +45,8 @@ fun ComposeList(listViewModel: ListViewModel) {
 
     }
 
-    ShowDialog(dialogState, noteToEdit)
+    ShowDialog(dialogState, indexToEdit, noteToEdit, listViewModel)
+
 }
 
 @Composable

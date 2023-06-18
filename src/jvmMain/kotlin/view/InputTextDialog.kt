@@ -4,17 +4,26 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import modelview.ListViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ShowDialog(dialogState: MutableState<Boolean>, textToEdit: MutableState<String>) {
+fun ShowDialog(
+    dialogState: MutableState<Boolean>,
+    index: MutableState<Int>,
+    textToEdit: MutableState<String>,
+    listViewModel: ListViewModel
+) {
 
     Dialog(
         visible = dialogState.value,
@@ -59,6 +68,8 @@ fun ShowDialog(dialogState: MutableState<Boolean>, textToEdit: MutableState<Stri
                     modifier = Modifier.padding(10.dp),
                     onClick = {
                         println("Ok clicked")
+                        dialogState.value = false
+                        listViewModel.changeItem(index.value, textToEdit.value)
                     }
                 ) {
                     Text("Ok")
@@ -67,3 +78,4 @@ fun ShowDialog(dialogState: MutableState<Boolean>, textToEdit: MutableState<Stri
         }
     }
 }
+
